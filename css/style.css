@@ -21,6 +21,7 @@ header h1 {
 header #search-book {
 	display: flex;
 	min-width: 100%;
+	outline: 1px solid #aaa;
 }
 
 #search-book input {
@@ -69,6 +70,7 @@ h2.results-heading {
 }
 
 .extra-data img {
+	max-width: 90%;
 	display: block;
  	margin: 0 auto;
 }

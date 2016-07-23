@@ -37,32 +37,6 @@ function createSuggestionHTML(book) {
 
 }
 
-// function that retrieves book data from OPEN LIBRARY for populating the list items.
-/*function getBookInfo(bookTitle) {
-	var params = {
-		q: bookTitle,
-	} 
-
-	$.ajax({
-		url: "//openlibrary.org/search.json?",
-		data: params,
-		dataType: "json"
-	})
-	.done(function(results) {
-		console.log(results);	
-
-		$.each(results.docs, function(index, item) {
-			var thisTitle = item.title;
-			
-			if(thisTitle === bookTitle) {
-				console.log(thisTitle);
-				return false;
-			}
-		})
-		//code to be executed goes here
-	});
-}*/
-
 //function that handles getting the info for a single recommendation from the Google
 //Books API
 function getBookInfo(bookTitle) {
@@ -86,6 +60,7 @@ function getBookInfo(bookTitle) {
 			//returns info for ONLY the necessary bookTitle
 			if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
 				console.log(thisBookInfo);
+				createSuggestionHTML();
 				return false;
 			} 
 		});
@@ -93,6 +68,36 @@ function getBookInfo(bookTitle) {
 	.fail(function(jqXHR, error) {
 		console.log(error);
 	});
+}
+
+
+function createResultsHeader(bookSearch) {
+	//takes the query parameters and modifies the header to match
+}
+
+function createSuggestionHTML(bookInfo) {
+	var thisBookHTML = $('.template li').clone();
+
+	//adds title
+	thisBookHTML.find('h3 a').text('Title');
+
+	//adds author
+	//needs to search through the array of authors and return a list of the authors
+	thisBookHTML.find('.author').text('Author');
+
+	//adds image
+	thisBookHTML.find('img').attr('src', 'https://placebear.com/300/300' );
+
+	//adds publication info
+	thisBookHTML.find('.pub-info').text('xx-xx-xxxx by PUBLISHER');
+
+	//adds # of pages
+	thisBookHTML.find('.pages').text('Pages: 500');
+
+	//adds description
+	thisBookHTML.find('p').text('This is a test');
+	//appends the book to the list of suggestions
+	$('.books-list').append(thisBookHTML);
 }
 
 /*----------------------------------------------------------------------*/
@@ -112,8 +117,8 @@ $(document).ready(function() {
 	});
 
 /*---- TESTING GROUNDS ----*/	
-	getSuggestions('dead souls');
-
+	// getSuggestions('dead souls');
+	getBookInfo('dead souls');
 
 
 
