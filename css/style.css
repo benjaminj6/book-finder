@@ -4,7 +4,6 @@
 }
 /*--- BODY STYLING ---*/
 body {
-	font-color: red;
 }
 div.container {
 	width: 94%;
@@ -28,7 +27,9 @@ header #search-book {
 	flex-grow: 1;
 }
 
-#search-box button {}
+#search-book button {
+	border: none;
+}
 
 /*--- SECTION.RESULTS STYLING ---*/
 section.search-results {}
@@ -54,30 +55,56 @@ h2.results-heading {
 
 .book h3 a {}
 
-.book h5.author {
+.book h4.author {
 	margin: 0;
 }
 
 .book h5.see-more {
 	text-align: center;
-	margin: 15px 0 0;
+	margin: 15px 0 10px;
 }
 
-.book div.extra-info {}
+.book div.extra-data {
+	margin-top: 20px;
+}
 
-.extra-info img {
+.extra-data img {
 	display: block;
  	margin: 0 auto;
 }
-.extra-info h5 {
+
+div.extra-book-info {
+	margin-top: 20px;
+}
+
+.extra-book-info h5 { 
+	display: inline-block;
+	margin: 0;
+}
+.extra-book-info h5.pub-info {
 	display: inline-block;
 }
-.extra-info h5.pub-info {}
-.extra-info h5.pages {
+.extra-book-info h5.pages {		
+	display: inline-block;
 	float: right;
 }
-.extra-info p {
-	margin: 0 auto;
+.extra-book-info p {
+	margin: 10px auto;
+}
+h5.see-less {
+	text-align: center;
+}
+
+/*--- MEDIA QUERIES ---*/
+@media only screen and (min-width: 600px) {
+	div.extra-data {
+		display: flex;
+	}
+	div.extra-book-info {
+		margin-top: 0;
+		padding-left: 5px;
+	}
+
 }
 
 
