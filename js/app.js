@@ -23,18 +23,15 @@ function getSuggestions(bookTitle) {
 
 		$.each(suggestionResults, function(index, item) {
 			// console.log("Item #" + (index + 1) + ": " + item.Name);
-			getBookInfo(item.Name);
 			//Code to generate the html list items
-		});
+			getBookInfo(item.Name);
+			// console.log(item.wTeaser)
+		})
 	})
 	.fail(function(jqXHR, error) {
 	//code which displays the error 
 	console.log(error);
 	});
-}
-
-function createSuggestionHTML(book) {
-
 }
 
 //function that handles getting the info for a single recommendation from the Google
@@ -53,17 +50,20 @@ function getBookInfo(bookTitle) {
 	})
 	.done(function(results) {
 		// console.log(results);
-		
+		var result = {};
+
 		$.each(results.items, function(index, item) {
 			var thisBookInfo = item.volumeInfo;
 
 			//returns info for ONLY the necessary bookTitle
 			if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
 				console.log(thisBookInfo);
-				createSuggestionHTML();
+				result = thisBookInfo;
 				return false;
-			} 
+			}
+
 		});
+		return result;
 	})
 	.fail(function(jqXHR, error) {
 		console.log(error);
@@ -75,15 +75,17 @@ function createResultsHeader(bookSearch) {
 	//takes the query parameters and modifies the header to match
 }
 
-function createSuggestionHTML(bookInfo) {
+function createBookHTML(bookInfo) {
 	var thisBookHTML = $('.template li').clone();
 
 	//adds title
-	thisBookHTML.find('h3 a').text('Title');
+	var title = bookInfo.title
+	thisBookHTML.find('h3 a').text(title);
 
 	//adds author
 	//needs to search through the array of authors and return a list of the authors
-	thisBookHTML.find('.author').text('Author');
+	var author = bookInfo.authors.toString()
+	thisBookHTML.find('.author').text('author');
 
 	//adds image
 	thisBookHTML.find('img').attr('src', 'https://placebear.com/300/300' );
@@ -95,7 +97,7 @@ function createSuggestionHTML(bookInfo) {
 	thisBookHTML.find('.pages').text('Pages: 500');
 
 	//adds description
-	thisBookHTML.find('p').text('This is a test');
+	// thisBookHTML.find('p').text('This is a test');
 	//appends the book to the list of suggestions
 	$('.books-list').append(thisBookHTML);
 }
@@ -117,8 +119,8 @@ $(document).ready(function() {
 	});
 
 /*---- TESTING GROUNDS ----*/	
-	// getSuggestions('dead souls');
-	getBookInfo('dead souls');
+	getSuggestions('love in the time of cholera');
+	
 
 
 
