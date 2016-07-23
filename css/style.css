@@ -1,0 +1,21 @@
+/*--- GENERAL CLASSES ---*/
+.hidden {
+	display: none;
+}
+/*--- BODY STYLING ---*/
+body {
+	text-align: center;
+	font-color: red;
+}
+div.container {
+	margin: 0 auto;
+}
+
+/*--- HEADER STYLING ---*/
+header {}
+header h1 {}
+header #search-book {}
+
+/*--- SECTION.RESULTS STYLING ---*/
+
+
