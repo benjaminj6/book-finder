@@ -13,13 +13,13 @@
 			<h1>Book Finder</h1>
 			<form action="submit" id="search-book">
 				<input type="text">
-				<button></button>
+				<button>Search!</button>
 			</form>
 		</header>
 		<section class="search-results">
 			<h2 class="results-heading"></h2>
-			<ul class="books">
-				<li>
+			<ul class="books-list">
+				<li class="book">
 					<h3>
 						<a href="" target="blank">Title1</a>
 					</h3>
@@ -32,7 +32,7 @@
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
 					</div>
 				</li>
-				<li>
+				<li class="book">
 					<h3>
 						<a href="" target="blank">Title1</a>
 					</h3>
@@ -41,11 +41,11 @@
 					<div class="extra-info hidden">
 						<img src="https://placekitten.com/300/300" alt="">
 						<h5 class="pub-info">Publisher</h5>
-						<h5 class="pgs">Pages: 400</h5>
+						<h5 class="pages">Pages: 400</h5>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
 					</div>
 				</li>
-				<li>
+				<li class="book">
 					<h3>
 						<a href="" target="blank">Title1</a>
 					</h3>
@@ -62,15 +62,16 @@
 		</section>
 	</div>
 	<div class="template hidden">
-		<div class="results-li">
-			<a href="" target="blank">
-				<h3 class="title"></h3>
-			</a>
-			<h5 class="author"></h5>
-			<img src="" alt="">
-			<h5 class="pub-info"></h5>
-			<h5 class="pgs"></h5>
-			<p></p>
+		<h3>
+			<a href="" target="blank">Title1</a>
+		</h3>
+		<h5 class="author">Author</h5>
+		<h5 class="see-more">See More</h5>
+		<div class="extra-info hidden">
+			<img src="https://placekitten.com/300/300" alt="">
+			<h5 class="pub-info">Publisher</h5>
+			<h5 class="pgs">Pages: 400</h5>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>

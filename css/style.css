@@ -17,5 +17,23 @@ header h1 {}
 header #search-book {}
 
 /*--- SECTION.RESULTS STYLING ---*/
+section.search-results {}
+h2.results-heading {}
+.search-results ul {
+	list-style: none;
+}
+
+.search-results ul li.book {}
+.book h3 {}
+.book h3 a {}
+.book h5.author {}
+.book h5.see-more {}
+.book div.extra-info {}
+.extra-info img {}
+.extra-info h5.pub-info {}
+.extra-info h5.pages {}
+.extra-info p {}
+
+
 
 
