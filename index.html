@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Book Finder</title>
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/style.css">
 </head>
@@ -12,32 +13,21 @@
 		<header>
 			<h1>Book Finder</h1>
 			<form action="submit" id="search-book">
-				<input type="text">
-				<button>Search!</button>
+				<input type="text" placeholder="Enter your favorite book here">
+				<button type="submit">Search!</button>
 			</form>
 		</header>
 		<section class="search-results">
-			<h2 class="results-heading"></h2>
+			<h2 class="results-heading">Books Like <em>Lorem ipsum:</em></h2>
 			<ul class="books-list">
 				<li class="book">
 					<h3>
-						<a href="" target="blank">Title1</a>
+						<a href="" target="blank">Lorem ipsum dolor.</a>
 					</h3>
-					<h5 class="author">Author</h5>
-					<h5 class="see-more">See More</h5>
-					<div class="extra-info hidden">
-						<img src="https://placekitten.com/300/300" alt="">
-						<h5 class="pub-info">Publisher</h5>
-						<h5 class="pgs">Pages: 400</h5>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
-					</div>
-				</li>
-				<li class="book">
-					<h3>
-						<a href="" target="blank">Title1</a>
-					</h3>
-					<h5 class="author">Author</h5>
-					<h5 class="see-more">See More</h5>
+					<h5 class="author">Lorem ipsum.</h5>
+					<h5 class="see-more">
+						See More <i class="fa fa-caret-down"></i>
+					</h5>
 					<div class="extra-info hidden">
 						<img src="https://placekitten.com/300/300" alt="">
 						<h5 class="pub-info">Publisher</h5>
@@ -47,15 +37,35 @@
 				</li>
 				<li class="book">
 					<h3>
-						<a href="" target="blank">Title1</a>
+						<a href="" target="blank">Lorem ipsum dolor.</a>
 					</h3>
-					<h5 class="author">Author</h5>
-					<h5 class="see-more">See More</h5>
+					<h5 class="author">Lorem ipsum.</h5>
+					<h5 class="see-more">
+						See More <i class="fa fa-caret-down"></i>
+					</h5>
+					<div class="extra-info">
+						<img src="https://placekitten.com/300/300" alt="">
+						<h5 class="pub-info">Publisher</h5>
+						<h5 class="pages">Pages: 400</h5>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
+					</div>
+				</li>
+				<li class="book">
+					<h3>
+						<a href="" target="blank">Lorem ipsum dolor.</a>
+					</h3>
+					<h5 class="author">Lorem ipsum.</h5>
+					<h5 class="see-more">
+						See More <i class="fa fa-caret-down"></i>
+					</h5>
 					<div class="extra-info hidden">
 						<img src="https://placekitten.com/300/300" alt="">
 						<h5 class="pub-info">Publisher</h5>
-						<h5 class="pgs">Pages: 400</h5>
+						<h5 class="pages">Pages: 400</h5>
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non laudantium reiciendis illo consectetur aut officiis facilis distinctio dolor qui nemo repellendus possimus iure dignissimos ratione id error odio nulla pariatur molestias voluptates architecto iste, porro sed cumque ut? Beatae, aut.</p>
+						<h5 class="see-less">
+							See Less <i class="fa fa-caret-up"></i>
+						</h5>
 					</div>
 				</li>
 			</ul>

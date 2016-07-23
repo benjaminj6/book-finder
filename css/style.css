@@ -4,35 +4,81 @@
 }
 /*--- BODY STYLING ---*/
 body {
-	text-align: center;
 	font-color: red;
 }
 div.container {
+	width: 94%;
+	max-width: 600px;
 	margin: 0 auto;
 }
 
 /*--- HEADER STYLING ---*/
-header {}
-header h1 {}
-header #search-book {}
+header {
+	text-align: center;
+}
+header h1 {
+	font-size: 34px;
+}
+header #search-book {
+	display: flex;
+	min-width: 100%;
+}
+
+#search-book input {
+	flex-grow: 1;
+}
+
+#search-box button {}
 
 /*--- SECTION.RESULTS STYLING ---*/
 section.search-results {}
-h2.results-heading {}
-.search-results ul {
-	list-style: none;
+
+h2.results-heading {
+	font-size: 24px;
 }
 
-.search-results ul li.book {}
-.book h3 {}
+.search-results ul {
+	list-style: none;
+	padding-left: 0px;
+}
+
+.search-results ul li.book {
+	outline: 1px solid #aaa;
+	padding: 10px 20px;
+	margin: 5px auto;
+}
+
+.book h3 {
+	margin: 15px 0;
+}
+
 .book h3 a {}
-.book h5.author {}
-.book h5.see-more {}
+
+.book h5.author {
+	margin: 0;
+}
+
+.book h5.see-more {
+	text-align: center;
+	margin: 15px 0 0;
+}
+
 .book div.extra-info {}
-.extra-info img {}
+
+.extra-info img {
+	display: block;
+ 	margin: 0 auto;
+}
+.extra-info h5 {
+	display: inline-block;
+}
 .extra-info h5.pub-info {}
-.extra-info h5.pages {}
-.extra-info p {}
+.extra-info h5.pages {
+	float: right;
+}
+.extra-info p {
+	margin: 0 auto;
+}
 
 
 
