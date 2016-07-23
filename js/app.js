@@ -38,7 +38,7 @@ function createSuggestionHTML(book) {
 }
 
 // function that retrieves book data for populating the list items.
-function getBookInfo(bookTitle) {
+/*function getBookInfo(bookTitle) {
 	var params = {
 		q: bookTitle,
 	} 
@@ -61,11 +61,11 @@ function getBookInfo(bookTitle) {
 		})
 		//code to be executed goes here
 	});
-}
+}*/
 
 //function that handles getting the info for a single recommendation from the Google
 //Books API
-/*function getBookInfo(bookTitle) {
+function getBookInfo(bookTitle) {
 	var param = {
 		q: "\"" + bookTitle + "\"",
 		key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs"
@@ -78,13 +78,21 @@ function getBookInfo(bookTitle) {
 		data: param,
 	})
 	.done(function(results) {
-		console.log(results);
-		return results;
+		// console.log(results);
+		
+		$.each(results.items, function(index, item) {
+			var thisBookInfo = item.volumeInfo;
+
+			if(thisBookInfo.title === bookTitle) {
+				console.log(thisBookInfo);
+				return false;
+			} 
+		})
 	})
 	.fail(function(jqXHR, error) {
 		console.log(error);
 	});
-}*/
+}
 
 /*----------------------------------------------------------------------*/
 $(document).ready(function() {
