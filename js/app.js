@@ -22,7 +22,7 @@ function getSuggestions(bookTitle) {
 		var suggestionResults = results.Similar.Results; 
 
 		$.each(suggestionResults, function(index, item) {
-			console.log("Item #" + (index + 1) + ": " + item.Name);
+			// console.log("Item #" + (index + 1) + ": " + item.Name);
 			getBookInfo(item.Name);
 			//Code to generate the html list items
 		});
@@ -37,7 +37,7 @@ function createSuggestionHTML(book) {
 
 }
 
-// function that retrieves book data for populating the list items.
+// function that retrieves book data from OPEN LIBRARY for populating the list items.
 /*function getBookInfo(bookTitle) {
 	var params = {
 		q: bookTitle,
@@ -67,7 +67,7 @@ function createSuggestionHTML(book) {
 //Books API
 function getBookInfo(bookTitle) {
 	var param = {
-		q: "\"" + bookTitle + "\"",
+		q: bookTitle,
 		key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs"
 	};
 
@@ -83,11 +83,12 @@ function getBookInfo(bookTitle) {
 		$.each(results.items, function(index, item) {
 			var thisBookInfo = item.volumeInfo;
 
-			if(thisBookInfo.title === bookTitle) {
+			//returns info for ONLY the necessary bookTitle
+			if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
 				console.log(thisBookInfo);
 				return false;
 			} 
-		})
+		});
 	})
 	.fail(function(jqXHR, error) {
 		console.log(error);
@@ -112,7 +113,7 @@ $(document).ready(function() {
 
 /*---- TESTING GROUNDS ----*/	
 	getSuggestions('dead souls');
-	// getBookInfo('njals saga')
+
 
 
 
