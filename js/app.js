@@ -5,8 +5,8 @@ function getSuggestions(bookTitle) {
 	var params = {
 		q: bookTitle,
 		type: "books",
-		info: 1,
-		limit: 10,
+		// info: 0,
+		limit: 3,
 		k: "233177-bookfind-G83JWAJK",
 		callback: "?"
 	};
@@ -30,10 +30,6 @@ function getSuggestions(bookTitle) {
 			// createBookHTML(gBooks, item);
 			// console.log(item.wTeaser)
 		})
-	})
-	.fail(function(jqXHR, error) {
-	//code which displays the error 
-	console.log(error);
 	});
 }
 
@@ -42,7 +38,8 @@ function getSuggestions(bookTitle) {
 function getBookInfo(bookTitle) {
 	var param = {
 		q: bookTitle,
-		key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs"
+		key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs", 
+		// fields:"items(volumeInfo)"
 	};
 
 	var googleURL = "https://www.googleapis.com/books/v1/volumes?";
@@ -52,9 +49,7 @@ function getBookInfo(bookTitle) {
 		data: param,
 	})
 	.done(function(results) {
-		// console.log(results);
-		var result;
-
+		console.log(results);
 		$.each(results.items, function(index, item) {
 			var thisBookInfo = item.volumeInfo;
 
@@ -67,9 +62,7 @@ function getBookInfo(bookTitle) {
 		});
 		
 	})
-	.fail(function(jqXHR, error) {
-		console.log(error);
-	});
+	.fail(function(jqXHR, error) {});
 }
 
 
@@ -87,10 +80,11 @@ function createBookHTML(bookTitle) {
 	//adds author
 	//needs to search through the array of authors and return a list of the authors
 	var author = bookTitle.authors.toString()
-	thisBookHTML.find('.author').text('author');
+	thisBookHTML.find('.author').text(author);
 
 	//adds image
-	thisBookHTML.find('img').attr('src', 'https://placebear.com/300/300' );
+	var imgURL = bookTitle.imageLinks.thumbnail
+	thisBookHTML.find('img').attr('src', imgURL );
 
 	//adds publication info
 	thisBookHTML.find('.pub-info').text('xx-xx-xxxx by PUBLISHER');
