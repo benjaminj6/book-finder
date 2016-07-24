@@ -74,26 +74,27 @@ function createBookHTML(bookTitle) {
 	var thisBookHTML = $('.template li').clone();
 
 	//adds title
-	var title = bookTitle.title
-	thisBookHTML.find('h3 a').text(title);
+	thisBookHTML.find('h3 a').text(bookTitle.title);
 
 	//adds author
 	//needs to search through the array of authors and return a list of the authors
-	var author = bookTitle.authors.toString()
-	thisBookHTML.find('.author').text(author);
+	var authors = bookTitle.authors.toString()
+	thisBookHTML.find('.author').text(authors);
 
 	//adds image
 	var imgURL = bookTitle.imageLinks.thumbnail
 	thisBookHTML.find('img').attr('src', imgURL );
 
 	//adds publication info
-	thisBookHTML.find('.pub-info').text('xx-xx-xxxx by PUBLISHER');
+
+	thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
 
 	//adds # of pages
-	thisBookHTML.find('.pages').text('Pages: 500');
+	thisBookHTML.find('.pages').text(bookTitle.pageCount + 'pgs.');
 
 	//adds description
-	// thisBookHTML.find('p').text('This is a test');
+	thisBookHTML.find('p').text(bookTitle.description);
+	
 	//appends the book to the list of suggestions
 	$('.books-list').append(thisBookHTML);
 }
