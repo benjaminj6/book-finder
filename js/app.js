@@ -68,13 +68,14 @@ function getBookInfo(bookTitle) {
 
 function createResultsHeader(bookSearch) {
 	//takes the query parameters and modifies the header to match
+	$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
 }
 
 function createBookHTML(bookTitle) {
 	var thisBookHTML = $('.template li').clone();
 
 	//adds title
-	thisBookHTML.find('h3 a').text(bookTitle.title);
+	thisBookHTML.find('h3 a').attr('href', bookTitle).text(bookTitle.title);
 
 	//adds author
 	//needs to search through the array of authors and return a list of the authors
@@ -105,8 +106,14 @@ $(document).ready(function() {
 	// user submits the form with either button or enter
 	$('#search-book').submit(function(event) {
 		event.preventDefault();	
-		console.log('form submitted');
 		// code here for functions that generate the list items
+		var search = $('#search-book input').val();
+		$('.books-list').empty();
+
+		getSuggestions(search);
+		createResultsHeader(search);
+
+		$('#search-book input').val('');
 	});
 
 	//user clicks on 'See More'
@@ -130,9 +137,6 @@ $(document).ready(function() {
 	function hide(selector) {
 		$(selector).not('.hidden').addClass('hidden')
 	}
-/*---- TESTING GROUNDS ----*/	
-	getSuggestions('lord of the rings');
-	// getBookInfo('Love in the time of cholera');
 
 
 
