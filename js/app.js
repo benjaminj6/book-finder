@@ -1,154 +1,126 @@
-//function that handles creating the html code to be added to the DOM
+function getSuggestions(bookTitle) { //retrieves suggestions based of a book title
+  var params = {
+    q: bookTitle,
+    type: "books",
+    // info: 0,
+    limit: 3,
+    k: "233177-bookfind-G83JWAJK",
+    callback: "?"
+  };
 
-//function that handles getting the recommendations from the TasteKid API.
-function getSuggestions(bookTitle) {
-	var params = {
-		q: bookTitle,
-		type: "books",
-		// info: 0,
-		limit: 3,
-		k: "233177-bookfind-G83JWAJK",
-		callback: "?"
-	};
+  $.ajax({
+    url: "https://www.tastekid.com/api/similar?",
+    data: params,
+    dataType: "jsonp",
+    type: "GET",
+  })
+  .done(function(results) {
+    var suggestionResults = results.Similar.Results;
 
-	$.ajax({
-		url: "https://www.tastekid.com/api/similar?",
-		data: params,
-		dataType: "jsonp",
-		type: "GET",
-	})
-	.done(function(results) {
-		// console.log(results);
-		var suggestionResults = results.Similar.Results; 
-
-		$.each(suggestionResults, function(index, item) {
-			// console.log("Item #" + (index + 1) + ": " + item.Name);
-			//Code to generate the html list items
-			// console.log(item);
-			var book = getBookInfo(item.Name);
-			// console.log(gBooks);
-			// createBookHTML(gBooks, item);
-			// console.log(item.wTeaser)
-			createResultsHeader(bookTitle);	
-		})
-
-	});
+    $.each(suggestionResults, function(index, item) {
+      var book = getBookInfo(item.Name);
+    })
+  });
 }
 
-//function that handles getting the info for a single recommendation from the Google
-//Books API
-function getBookInfo(bookTitle) {
-	var param = {
-		q: bookTitle,
-		key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs", 
-		// fields:"items(volumeInfo)"
-	};
+function getBookInfo(bookTitle) { //retrives data for a single book
+  var param = {
+    q: bookTitle,
+    key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs",
+  };
 
-	var googleURL = "https://www.googleapis.com/books/v1/volumes?";
+  var googleURL = "https://www.googleapis.com/books/v1/volumes?";
 
-	$.ajax({
-		url: googleURL,
-		data: param,
-	})
-	.done(function(results) {
-		console.log(results);
-		$.each(results.items, function(index, item) {
-			var thisBookInfo = item.volumeInfo;
+  $.ajax({
+    url: googleURL,
+    data: param,
+  })
+  .done(function(results) {
+    $.each(results.items, function(index, item) {
+      var thisBookInfo = item.volumeInfo;
 
-			//returns info for ONLY the necessary bookTitle
-			if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
-				console.log(thisBookInfo);
-				createBookHTML(thisBookInfo);
-				return false;
-			}
-
-
-		});
-
-	})
-	.fail(function(jqXHR, error) {});
-}
-
-
-function createResultsHeader(bookSearch) {
-	//takes the query parameters and modifies the header to match
-	$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
+      //returns info for ONLY the book title that matches the query
+      if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
+        console.log(thisBookInfo);
+        createBookHTML(thisBookInfo);
+        return false;
+      }
+    });
+  })
 }
 
 function createBookHTML(bookTitle) {
-	var thisBookHTML = $('.template li').clone();
+  var thisBookHTML = $('.template li').clone();
 
-	//adds title
-	thisBookHTML.find('h3 a').attr('href', bookTitle).text(bookTitle.title);
+  //adds title
+  thisBookHTML.find('h3 a').attr('href', bookTitle).text(bookTitle.title);
 
-	//adds author
-	//needs to search through the array of authors and return a list of the authors
-	var authors = bookTitle.authors.toString()
-	thisBookHTML.find('.author').text(authors);
+  //adds author
+  //needs to search through the array of authors and return a list of the authors
+  var authors = bookTitle.authors.toString()
+  thisBookHTML.find('.author').text(authors);
 
-	//adds image
-	var imgURL = bookTitle.imageLinks.thumbnail
-	thisBookHTML.find('.thumbnail').attr('src', imgURL );
+  //adds image
+  var imgURL = bookTitle.imageLinks.thumbnail
+  thisBookHTML.find('.thumbnail').attr('src', imgURL);
 
-	//adds publication info
+  //adds publication info
 
-	thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
+  thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
 
-	//adds # of pages
-	thisBookHTML.find('.pages').text(bookTitle.pageCount + 'pgs.');
+  //adds # of pages
+  thisBookHTML.find('.pages').text(bookTitle.pageCount + 'pgs.');
 
-	//adds description
-	thisBookHTML.find('p').text(bookTitle.description);
-	
-	//appends the book to the list of suggestions
-	$('.books-list').append(thisBookHTML);
+  //adds description
+  thisBookHTML.find('p').text(bookTitle.description);
+
+  //appends the book to the list of suggestions
+  $('.books-list').append(thisBookHTML);
+}
+
+function createResultsHeader(bookSearch) {
+  //takes the query parameters and modifies the header to match
+  $('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
+}
+
+function hide(selector) {
+  $(selector).not('.hidden').addClass('hidden')
 }
 
 /*----------------------------------------------------------------------*/
 $(document).ready(function() {
 
-	// user submits the form with either button or enter
-	$('#search-book').submit(function(event) {
-		event.preventDefault();	
-		// code here for functions that generate the list items
-		var search = $('#search-book input').val();
-		$('.books-list').empty();
+  // user submits the form with either button or enter
+  $('#search-book').submit(function(event) {
+    event.preventDefault();
 
-		getSuggestions(search);
-		// createResultsHeader(search);
-		console.log($('.books-list li').length);
-		$('#search-book input').val('');
-	});
+    //clears any previous search results
+    $('.books-list').empty();
+    
+    //creates the suggestion list for a search query
+    var search = $('#search-book input').val();
+    getSuggestions(search);
+    createResultsHeader(search);
 
-	//user clicks on 'See More'
-	$('.books-list').on('click', '.see-more', function() {
-		console.log('see-more clicked');
-		//resets currently shown items to collapsed
-		hide('.dropdown');
-		$('.see-more.hidden').removeClass('hidden');
+    //clears out the text input for future searches
+    $('#search-book input').val('');
+  });
 
-		//hide button and show dropdown
-		hide(this);
-		$(this).siblings('.dropdown').removeClass('hidden');
-	});
+  //user clicks on 'See More'
+  $('.books-list').on('click', '.see-more', function() {
+    //resets currently shown items to collapsed
+    hide('.dropdown');
+    $('.see-more.hidden').removeClass('hidden');
 
-	//user clicks on 'See Less'
-	$('.books-list').on('click', '.see-less', function() {
-		hide('.dropdown');
-		$(this).parents().siblings('.see-more').removeClass('hidden');
-	})
+    //hides see-more button and shows dropdown
+    hide(this);
+    $(this).siblings('.dropdown').removeClass('hidden');
+  });
 
-	function hide(selector) {
-		$(selector).not('.hidden').addClass('hidden')
-	}
-
-
-
-
-
-
+  //user clicks on 'See Less'
+  $('.books-list').on('click', '.see-less', function() {
+    //collapses the item and shows the see-more button again
+    hide('.dropdown');
+    $(this).parents().siblings('.see-more').removeClass('hidden');
+  })
 });
-
-
-
-
