@@ -18,13 +18,16 @@ function getSuggestions(bookTitle) {
 		type: "GET",
 	})
 	.done(function(results) {
-		console.log(results);
+		// console.log(results);
 		var suggestionResults = results.Similar.Results; 
 
 		$.each(suggestionResults, function(index, item) {
 			// console.log("Item #" + (index + 1) + ": " + item.Name);
 			//Code to generate the html list items
-			getBookInfo(item.Name);
+			// console.log(item);
+			var book = getBookInfo(item.Name);
+			// console.log(gBooks);
+			// createBookHTML(gBooks, item);
 			// console.log(item.wTeaser)
 		})
 	})
@@ -50,7 +53,7 @@ function getBookInfo(bookTitle) {
 	})
 	.done(function(results) {
 		// console.log(results);
-		var result = {};
+		var result;
 
 		$.each(results.items, function(index, item) {
 			var thisBookInfo = item.volumeInfo;
@@ -58,12 +61,11 @@ function getBookInfo(bookTitle) {
 			//returns info for ONLY the necessary bookTitle
 			if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
 				console.log(thisBookInfo);
-				result = thisBookInfo;
+				createBookHTML(thisBookInfo);
 				return false;
 			}
-
 		});
-		return result;
+		
 	})
 	.fail(function(jqXHR, error) {
 		console.log(error);
@@ -75,16 +77,16 @@ function createResultsHeader(bookSearch) {
 	//takes the query parameters and modifies the header to match
 }
 
-function createBookHTML(bookInfo) {
+function createBookHTML(bookTitle) {
 	var thisBookHTML = $('.template li').clone();
 
 	//adds title
-	var title = bookInfo.title
+	var title = bookTitle.title
 	thisBookHTML.find('h3 a').text(title);
 
 	//adds author
 	//needs to search through the array of authors and return a list of the authors
-	var author = bookInfo.authors.toString()
+	var author = bookTitle.authors.toString()
 	thisBookHTML.find('.author').text('author');
 
 	//adds image
@@ -120,7 +122,7 @@ $(document).ready(function() {
 
 /*---- TESTING GROUNDS ----*/	
 	getSuggestions('love in the time of cholera');
-	
+	// getBookInfo('Love in the time of cholera');
 
 
 
