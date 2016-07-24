@@ -80,7 +80,7 @@ function createBookHTML(bookTitle) {
 	//needs to search through the array of authors and return a list of the authors
 	var authors = bookTitle.authors.toString()
 	thisBookHTML.find('.author').text(authors);
-	
+
 	//adds image
 	var imgURL = bookTitle.imageLinks.thumbnail
 	thisBookHTML.find('.thumbnail').attr('src', imgURL );
@@ -112,9 +112,24 @@ $(document).ready(function() {
 	//user clicks on 'See More'
 	$('.books-list').on('click', '.see-more', function() {
 		console.log('see-more clicked');
-		//code to generate additional info for clicked item
+		//resets currently shown items to collapsed
+		hide('.dropdown');
+		$('.see-more.hidden').removeClass('hidden');
+
+		//hide button and show dropdown
+		hide(this);
+		$(this).siblings('.dropdown').removeClass('hidden');
 	});
 
+	//user clicks on 'See Less'
+	$('.books-list').on('click', '.see-less', function() {
+		hide('.dropdown');
+		$(this).parents().siblings('.see-more').removeClass('hidden');
+	})
+
+	function hide(selector) {
+		$(selector).not('.hidden').addClass('hidden')
+	}
 /*---- TESTING GROUNDS ----*/	
 	getSuggestions('lord of the rings');
 	// getBookInfo('Love in the time of cholera');
