@@ -68,7 +68,12 @@ function getBookInfo(bookTitle) {
 
 function createResultsHeader(bookSearch) {
 	//takes the query parameters and modifies the header to match
-	$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
+	if ($('.books-list li').length > 0) {
+		$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
+	} else {
+		$('.results-heading').html('Oops! No suggestions were found for <em>' + bookSearch + 
+			'</em>. Please try a different book.')
+	}
 }
 
 function createBookHTML(bookTitle) {
