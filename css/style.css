@@ -28,6 +28,10 @@ header #search-book {
 	flex-grow: 1;
 }
 
+#search-book input:focus {
+	outline: none;
+}
+
 #search-book button {
 	border: none;
 }

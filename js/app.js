@@ -29,7 +29,9 @@ function getSuggestions(bookTitle) {
 			// console.log(gBooks);
 			// createBookHTML(gBooks, item);
 			// console.log(item.wTeaser)
+			createResultsHeader(bookTitle);	
 		})
+
 	});
 }
 
@@ -59,8 +61,10 @@ function getBookInfo(bookTitle) {
 				createBookHTML(thisBookInfo);
 				return false;
 			}
+
+
 		});
-		
+
 	})
 	.fail(function(jqXHR, error) {});
 }
@@ -68,12 +72,7 @@ function getBookInfo(bookTitle) {
 
 function createResultsHeader(bookSearch) {
 	//takes the query parameters and modifies the header to match
-	if ($('.books-list li').length > 0) {
-		$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
-	} else {
-		$('.results-heading').html('Oops! No suggestions were found for <em>' + bookSearch + 
-			'</em>. Please try a different book.')
-	}
+	$('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
 }
 
 function createBookHTML(bookTitle) {
@@ -116,8 +115,8 @@ $(document).ready(function() {
 		$('.books-list').empty();
 
 		getSuggestions(search);
-		createResultsHeader(search);
-
+		// createResultsHeader(search);
+		console.log($('.books-list li').length);
 		$('#search-book input').val('');
 	});
 
