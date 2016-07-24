@@ -73,6 +73,7 @@ h2.results-heading {
 	max-width: 90%;
 	display: block;
  	margin: 0 auto;
+ 	align-self: flex-start;
 }
 
 div.extra-book-info {
@@ -104,7 +105,7 @@ h5.see-less {
 	}
 	div.extra-book-info {
 		margin-top: 0;
-		padding-left: 5px;
+		padding-left: 15px;
 	}
 }
 

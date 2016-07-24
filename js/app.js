@@ -80,10 +80,10 @@ function createBookHTML(bookTitle) {
 	//needs to search through the array of authors and return a list of the authors
 	var authors = bookTitle.authors.toString()
 	thisBookHTML.find('.author').text(authors);
-
+	
 	//adds image
 	var imgURL = bookTitle.imageLinks.thumbnail
-	thisBookHTML.find('img').attr('src', imgURL );
+	thisBookHTML.find('.thumbnail').attr('src', imgURL );
 
 	//adds publication info
 
@@ -116,7 +116,7 @@ $(document).ready(function() {
 	});
 
 /*---- TESTING GROUNDS ----*/	
-	getSuggestions('love in the time of cholera');
+	getSuggestions('lord of the rings');
 	// getBookInfo('Love in the time of cholera');
 
 
