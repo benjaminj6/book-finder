@@ -1,10 +1,16 @@
-/*--- GENERAL CLASSES ---*/
+/*--- GENERAL STYLINGS ---*/
 .hidden {
 	display: none;
 }
 
 .color-text {
 	color: #009688 !important;
+}
+
+header button:hover, 
+ul .see-more:hover,  
+ul .see-less:hover {
+	cursor: pointer;
 }
 
 /*--- BODY STYLING ---*/
@@ -60,6 +66,9 @@ header #search-book {
 	background-color: #009688;
 	color: #fff;	
 }
+
+/*TODO -- ADD HOVER FOR THE BUTTON THAT CHANGES THE MOUSE POINTER */
+
 
 /*--- SECTION.RESULTS STYLING ---*/
 section.search-results {
