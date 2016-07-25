@@ -18,7 +18,7 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     var suggestionResults = results.Similar.Results;
 
     //returns an success/error message to the user in h2.results-heading
-    if (suggestionResults.length > 1) {
+    if (suggestionResults.length > 0) {
       var successHeading = 'Books similar to <em>' + bookTitle + '</em>:';
       createResultsHeading(successHeading);
     } else {
@@ -27,7 +27,6 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
       createResultsHeading(errorHeading);
     }
 
-    //generates the list of items from google books api
     $.each(suggestionResults, function(index, item) {
       var book = getBookInfo(item.Name);
     });
@@ -65,38 +64,55 @@ function getBookInfo(bookTitle) { //retrives data for a single book
 }
 
 function createBookHTML(bookTitle) {
-  var thisBookHTML = $('.template li').clone();
+
+  var $thisBookHTML = $('.template li').clone();
+
+  var author = bookTitle.authors[0];
+  var publisher = bookTitle.publisher;
+  var publishDate = bookTitle.publishedDate;
+  var infoLink = bookTitle.infoLink; 
+  var title = bookTitle.title;
+  var description = bookTitle.description;
+
+  if (!bookTitle.hasOwnProperty('imageLinks')) {
+    var imageURL = 'assets/images/no-image.png';
+  } else {
+    var imageURL = bookTitle.imageLinks.thumbnail;
+  }
+
+  if(!bookTitle.hasOwnProperty('pageCount')) {
+    pageCount = 'Page Info Unavailable'
+  } else {
+    var pageCount = bookTitle.pageCount + 'pgs';
+  }
 
   //adds link
-  thisBookHTML.find('a').attr('href', bookTitle.infoLink);
-
+  $thisBookHTML.find('a').attr('href', infoLink)
   //adds title
-  thisBookHTML.find('a h3').text(bookTitle.title);
+  $thisBookHTML.find('a h3').text(title);
   //adds author
-  var author = bookTitle.authors[0];
-  thisBookHTML.find('.author').text(author);
+  $thisBookHTML.find('.author').text(author);
 
   //adds image
-  var imgURL = bookTitle.imageLinks.thumbnail;
-  thisBookHTML.find('.thumbnail').attr('src', imgURL);
+  console.log(bookTitle.imageLinks);
+  $thisBookHTML.find('.thumbnail').attr('src', imageURL);
 
   //adds publication info
-  thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
+  $thisBookHTML.find('.pub-info').text(publishDate + ' by ' + publisher);
 
   //adds # of pages
-  thisBookHTML.find('.pages').text(bookTitle.pageCount + ' pgs.');
+  $thisBookHTML.find('.pages').text(pageCount);
 
   //adds description
-  thisBookHTML.find('p').text(bookTitle.description);
+  $thisBookHTML.find('p').text(description);
 
   //appends the book to the list of suggestions
-  $('.books-list').append(thisBookHTML);
+  $('.books-list').append($thisBookHTML);
 }
 
 function moveHeader() {
   $('header').animate({ margin: "0" }, 200, function() {
     $(this).css('position', 'fixed');
-    console.log('position fixed');
   });
 }
 
@@ -104,39 +120,39 @@ function hide(selector) {
   $(selector).not('.hidden').addClass('hidden');
 }
 
-/*----------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------*/
 $(document).ready(function() {
 
-  // user submits the form with either button or enter
   $('#search-book').submit(function(event) {
     event.preventDefault();
+    
+    var $search = $('#search-book input').val(); 
 
-    //clears any previous search results
-    $('.books-list').empty();
+    if ($search.length > 3) {
+      $('.books-list').empty();
+      $('.search-results').css('padding-top', '148px');
 
-    //creates the suggestion list for a search query
-    var search = $('#search-book input').val();
-    getSuggestions(search);
-    moveHeader();
+      getSuggestions($search);
+      moveHeader();
 
-    //clears out the text input for future searches
-    $('#search-book input').val('');
+      $('#search-book input').val('');
+    } else {
+      $('.books-list').empty();
+
+      createResultsHeading('Please enter a search term greater than 3 characters.');
+    }
+
   });
 
-  //user clicks on 'See More'
-  $('.books-list').on('click', '.see-more', function() {
-    //returns any currently shown items to collapsed
+  $('.books-list').on('click', '.see-more', function() {  
     hide('.dropdown');
     $('.see-more.hidden').removeClass('hidden');
 
-    //hides see-more button and shows dropdown
     hide(this);
     $(this).siblings('.dropdown').removeClass('hidden');
   });
 
-  //user clicks on 'See Less'
   $('.books-list').on('click', '.see-less', function() {
-    //collapses the item and shows the see-more button again
     hide('.dropdown');
     $(this).parents().siblings('.see-more').removeClass('hidden');
   });
