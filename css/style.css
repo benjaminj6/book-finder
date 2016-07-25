@@ -76,13 +76,16 @@ h2.results-heading {
 	padding: 15px;
 }
 
-.book h3 {
-	margin: 0;
+.title-and-author a {
+	display: block;
+	text-decoration: none;
 }
 
-.title-and-author h3 a {
+.title-and-author h3 {
+	margin: 0;
 	color: #000;
 }
+
 
 .title-and-author h4.author {
 	margin: 5px 0 0;

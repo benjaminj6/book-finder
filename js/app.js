@@ -3,7 +3,7 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     q: bookTitle,
     type: "books",
     // info: 0,
-    limit: 1,
+    limit: 5,
     k: "233177-bookfind-G83JWAJK",
     callback: "?"
   };
@@ -53,8 +53,9 @@ function createBookHTML(bookTitle) {
   var thisBookHTML = $('.template li').clone();
 
   //adds title
-  thisBookHTML.find('a').attr('href', bookTitle.infoLink).text(bookTitle.title);
+  thisBookHTML.find('a').attr('href', bookTitle.infoLink);
 
+  thisBookHTML.find('a h3').text(bookTitle.title);
   //adds author
   //needs to search through the array of authors and return a list of the authors
   var authors = bookTitle.authors[0];
