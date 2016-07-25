@@ -68,7 +68,6 @@ function createBookHTML(bookTitle) {
   var $thisBookHTML = $('.template li').clone();
 
   var author = bookTitle.authors[0];
-  var publisher = bookTitle.publisher;
   var publishDate = bookTitle.publishedDate;
   var infoLink = bookTitle.infoLink; 
   var title = bookTitle.title;
@@ -81,9 +80,16 @@ function createBookHTML(bookTitle) {
   }
 
   if(!bookTitle.hasOwnProperty('pageCount')) {
-    pageCount = 'Page Info Unavailable'
+    var pageCount = 'Page Info Unavailable'
   } else {
-    var pageCount = bookTitle.pageCount + 'pgs';
+    pageCount = bookTitle.pageCount + 'pgs';
+  }
+
+  if(!bookTitle.hasOwnProperty('publisher')) {
+    var publisher = 'Unknown Publisher'
+  } else {
+    publisher = bookTitle.publisher;
+
   }
 
   //adds link
