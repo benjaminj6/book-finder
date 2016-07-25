@@ -15,12 +15,22 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     type: "GET",
   })
   .done(function(results) {
+  	console.log(results);
     var suggestionResults = results.Similar.Results;
 
+    if (suggestionResults.length > 1) {
+    	var message = 'Books similar to <em>' + bookTitle + '</em>:';
+	    createResultsHeading(bookTitle, message);		    	
+
+    } else {
+    	var message = 'Oops! No results were found for <em>' + bookTitle + 
+    	'</em>. Please try another search.';
+    	createResultsHeading(bookTitle, message);
+    }
     $.each(suggestionResults, function(index, item) {
       var book = getBookInfo(item.Name);
-    })
-  });
+    });
+  })
 }
 
 function getBookInfo(bookTitle) { //retrives data for a single book
@@ -46,7 +56,7 @@ function getBookInfo(bookTitle) { //retrives data for a single book
         return false;
       }
     });
-  })
+  });
 }
 
 function createBookHTML(bookTitle) {
@@ -62,7 +72,7 @@ function createBookHTML(bookTitle) {
   thisBookHTML.find('.author').text(authors);
 
   //adds image
-  var imgURL = bookTitle.imageLinks.thumbnail
+  var imgURL = bookTitle.imageLinks.thumbnail;
   thisBookHTML.find('.thumbnail').attr('src', imgURL);
 
   //adds publication info
@@ -79,9 +89,9 @@ function createBookHTML(bookTitle) {
   $('.books-list').append(thisBookHTML);
 }
 
-function createResultsHeading(bookSearch) {
+function createResultsHeading(bookSearch, message) {
   //takes the query parameters and modifies the header to match
-  $('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
+  $('.results-heading').html(message);
 }
 
 function moveHeader() {
@@ -91,7 +101,7 @@ function moveHeader() {
 	});
 }
 function hide(selector) {
-  $(selector).not('.hidden').addClass('hidden')
+  $(selector).not('.hidden').addClass('hidden');
 }
 
 /*----------------------------------------------------------------------*/
@@ -107,7 +117,6 @@ $(document).ready(function() {
     //creates the suggestion list for a search query
     var search = $('#search-book input').val();
     getSuggestions(search);
-    createResultsHeading(search);
     moveHeader();
 
     //clears out the text input for future searches
@@ -130,5 +139,5 @@ $(document).ready(function() {
     //collapses the item and shows the see-more button again
     hide('.dropdown');
     $(this).parents().siblings('.see-more').removeClass('hidden');
-  })
+  });
 });

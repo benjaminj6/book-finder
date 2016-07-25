@@ -133,6 +133,7 @@ div.extra-book-info {
 .extra-book-info h5 { 
 	display: inline-block;
 	margin: 0;
+	font-weight: 500;
 }
 .extra-book-info h5.pub-info {
 	display: inline-block;
@@ -162,6 +163,8 @@ h5.see-less {
 	div.extra-book-info {
 		margin-top: 0;
 		padding-left: 15px;
+		min-width: 70%;
+
 	}
 }
 
