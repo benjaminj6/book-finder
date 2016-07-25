@@ -2,9 +2,16 @@
 .hidden {
 	display: none;
 }
+
+.color-text {
+	color: #009688 !important;
+}
+
 /*--- BODY STYLING ---*/
 body {
+	margin: 0;
 }
+
 div.container {
 	width: 94%;
 	max-width: 600px;
@@ -14,14 +21,17 @@ div.container {
 /*--- HEADER STYLING ---*/
 header {
 	text-align: center;
+	padding: 15px;
+
 }
 header h1 {
 	font-size: 34px;
+	color: #009688;
 }
 header #search-book {
 	display: flex;
 	min-width: 100%;
-	outline: 1px solid #aaa;
+	border: 1px solid #aaa;
 }
 
 #search-book input {
@@ -34,6 +44,15 @@ header #search-book {
 
 #search-book button {
 	border: none;
+	background-color: #009688;
+	color: #fff;	
+
+
+}
+
+hr {
+	height: 0.5px;
+	background-color: #009688;
 }
 
 /*--- SECTION.RESULTS STYLING ---*/
@@ -50,23 +69,37 @@ h2.results-heading {
 
 .search-results ul li.book {
 	outline: 1px solid #aaa;
-	padding: 10px 20px;
-	margin: 5px auto;
+	margin: 15px auto;
+}
+
+.book div.title-and-author {
+	padding: 15px;
 }
 
 .book h3 {
-	margin: 15px 0;
-}
-
-.book h3 a {}
-
-.book h4.author {
 	margin: 0;
 }
 
+.title-and-author h3 a {
+	color: #000;
+}
+
+.title-and-author h4.author {
+	margin: 5px 0 0;
+	color: #009688;
+}
+
 .book h5.see-more {
+	background-color: #E0F2F1; 
 	text-align: center;
-	margin: 15px 0 10px;
+	padding: 10px 0;
+	margin: 0;
+}
+
+.book .dropdown {
+	padding: 10px 20px;
+	background-color: #E0F2F1; 
+
 }
 
 .book div.extra-data {
@@ -100,13 +133,19 @@ div.extra-book-info {
 }
 h5.see-less {
 	text-align: center;
+	margin: 10px auto 0;
 }
 
 /*--- MEDIA QUERIES ---*/
 @media only screen and (min-width: 600px) {
+	header h1 {
+		font-size: 48px;
+	}
+
 	div.extra-data {
 		display: flex;
 	}
+
 	div.extra-book-info {
 		margin-top: 0;
 		padding-left: 15px;
