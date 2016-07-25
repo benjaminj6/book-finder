@@ -1,8 +1,7 @@
-function getSuggestions(bookTitle) { //retrieves suggestions based of a book title
+function getSuggestions(bookTitle) {
   var params = {
     q: bookTitle,
     type: "books",
-    // info: 0,
     limit: 5,
     k: "233177-bookfind-G83JWAJK",
     callback: "?"
@@ -17,7 +16,6 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
   .done(function(results) {
     var suggestionResults = results.Similar.Results;
 
-    //returns an success/error message to the user in h2.results-heading
     if (suggestionResults.length > 0) {
       var successHeading = 'Books similar to <em>' + bookTitle + '</em>:';
       createResultsHeading(successHeading);
@@ -34,11 +32,10 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
 }
 
 function createResultsHeading(message) {
-  //matches h2.results-heading to the given message
   $('.results-heading').html(message);
 }
 
-function getBookInfo(bookTitle) { //retrives data for a single book
+function getBookInfo(bookTitle) { 
   var param = {
     q: bookTitle,
     key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs",
@@ -73,6 +70,7 @@ function createBookHTML(bookTitle) {
   var title = bookTitle.title;
   var description = bookTitle.description;
 
+  // Tests whether Google Books API has information about the book
   if (!bookTitle.hasOwnProperty('imageLinks')) {
     var imageURL = 'assets/images/no-image.png';
   } else {
