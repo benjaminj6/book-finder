@@ -8,6 +8,11 @@
 }
 
 /*--- BODY STYLING ---*/
+* {
+	font-family: "Roboto", sans-serif;
+	font-weight: 300;
+}
+
 body {
 	margin: 0;
 }
@@ -28,6 +33,7 @@ header h1 {
 	font-size: 34px;
 	color: #009688;
 	margin: 0;
+	font-weight: 900;
 }
 header #search-book {
 	display: flex;
@@ -87,6 +93,7 @@ h2.results-heading {
 .title-and-author h3 {
 	margin: 0;
 	color: #000;
+	font-weight: 500;
 }
 
 

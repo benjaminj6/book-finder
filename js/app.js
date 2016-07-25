@@ -3,7 +3,7 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     q: bookTitle,
     type: "books",
     // info: 0,
-    limit: 5,
+    limit: 3,
     k: "233177-bookfind-G83JWAJK",
     callback: "?"
   };
@@ -70,7 +70,7 @@ function createBookHTML(bookTitle) {
   thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
 
   //adds # of pages
-  thisBookHTML.find('.pages').text(bookTitle.pageCount + 'pgs.');
+  thisBookHTML.find('.pages').text(bookTitle.pageCount + ' pgs.');
 
   //adds description
   thisBookHTML.find('p').text(bookTitle.description);
