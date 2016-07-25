@@ -3,7 +3,7 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     q: bookTitle,
     type: "books",
     // info: 0,
-    limit: 3,
+    limit: 5,
     k: "233177-bookfind-G83JWAJK",
     callback: "?"
   };
