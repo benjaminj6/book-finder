@@ -21,12 +21,13 @@ div.container {
 /*--- HEADER STYLING ---*/
 header {
 	text-align: center;
-	padding: 15px;
+	padding: 20px 15px;
 
 }
 header h1 {
 	font-size: 34px;
 	color: #009688;
+	margin: 0;
 }
 header #search-book {
 	display: flex;
@@ -53,6 +54,7 @@ header #search-book {
 hr {
 	height: 0.5px;
 	background-color: #009688;
+	margin: 0;
 }
 
 /*--- SECTION.RESULTS STYLING ---*/
@@ -68,8 +70,9 @@ h2.results-heading {
 }
 
 .search-results ul li.book {
-	outline: 1px solid #aaa;
+	border: 1px solid #aaa;
 	margin: 15px auto;
+	border-radius: 2px;
 }
 
 .book div.title-and-author {
