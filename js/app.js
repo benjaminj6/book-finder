@@ -15,22 +15,28 @@ function getSuggestions(bookTitle) { //retrieves suggestions based of a book tit
     type: "GET",
   })
   .done(function(results) {
-  	console.log(results);
     var suggestionResults = results.Similar.Results;
 
+    //returns an success/error message to the user in h2.results-heading
     if (suggestionResults.length > 1) {
-    	var message = 'Books similar to <em>' + bookTitle + '</em>:';
-	    createResultsHeading(bookTitle, message);		    	
-
+      var successHeading = 'Books similar to <em>' + bookTitle + '</em>:';
+      createResultsHeading(successHeading);
     } else {
-    	var message = 'Oops! No results were found for <em>' + bookTitle + 
-    	'</em>. Please try another search.';
-    	createResultsHeading(bookTitle, message);
+      var errorHeading = 'Oops! No results were found for <em>' + bookTitle +
+        '</em>. Please try another search.';
+      createResultsHeading(errorHeading);
     }
+
+    //generates the list of items from google books api
     $.each(suggestionResults, function(index, item) {
       var book = getBookInfo(item.Name);
     });
-  })
+  });
+}
+
+function createResultsHeading(message) {
+  //matches h2.results-heading to the given message
+  $('.results-heading').html(message);
 }
 
 function getBookInfo(bookTitle) { //retrives data for a single book
@@ -51,7 +57,6 @@ function getBookInfo(bookTitle) { //retrives data for a single book
 
       //returns info for ONLY the book title that matches the query
       if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
-        console.log(thisBookInfo);
         createBookHTML(thisBookInfo);
         return false;
       }
@@ -62,21 +67,20 @@ function getBookInfo(bookTitle) { //retrives data for a single book
 function createBookHTML(bookTitle) {
   var thisBookHTML = $('.template li').clone();
 
-  //adds title
+  //adds link
   thisBookHTML.find('a').attr('href', bookTitle.infoLink);
 
+  //adds title
   thisBookHTML.find('a h3').text(bookTitle.title);
   //adds author
-  //needs to search through the array of authors and return a list of the authors
-  var authors = bookTitle.authors[0];
-  thisBookHTML.find('.author').text(authors);
+  var author = bookTitle.authors[0];
+  thisBookHTML.find('.author').text(author);
 
   //adds image
   var imgURL = bookTitle.imageLinks.thumbnail;
   thisBookHTML.find('.thumbnail').attr('src', imgURL);
 
   //adds publication info
-
   thisBookHTML.find('.pub-info').text(bookTitle.publishedDate + ' by ' + bookTitle.publisher);
 
   //adds # of pages
@@ -89,17 +93,13 @@ function createBookHTML(bookTitle) {
   $('.books-list').append(thisBookHTML);
 }
 
-function createResultsHeading(bookSearch, message) {
-  //takes the query parameters and modifies the header to match
-  $('.results-heading').html(message);
+function moveHeader() {
+  $('header').animate({ margin: "0" }, 200, function() {
+    $(this).css('position', 'fixed');
+    console.log('position fixed');
+  });
 }
 
-function moveHeader() {
-	$('header').animate({margin: "0"}, 200, function() {
-		$(this).css('position', 'fixed');
-		console.log('position fixed');
-	});
-}
 function hide(selector) {
   $(selector).not('.hidden').addClass('hidden');
 }
@@ -113,7 +113,7 @@ $(document).ready(function() {
 
     //clears any previous search results
     $('.books-list').empty();
-    
+
     //creates the suggestion list for a search query
     var search = $('#search-book input').val();
     getSuggestions(search);
@@ -125,7 +125,7 @@ $(document).ready(function() {
 
   //user clicks on 'See More'
   $('.books-list').on('click', '.see-more', function() {
-    //resets currently shown items to collapsed
+    //returns any currently shown items to collapsed
     hide('.dropdown');
     $('.see-more.hidden').removeClass('hidden');
 
