@@ -79,11 +79,17 @@ function createBookHTML(bookTitle) {
   $('.books-list').append(thisBookHTML);
 }
 
-function createResultsHeader(bookSearch) {
+function createResultsHeading(bookSearch) {
   //takes the query parameters and modifies the header to match
   $('.results-heading').html('Books similar to <em>' + bookSearch + '</em>:')
 }
 
+function moveHeader() {
+	$('header').animate({margin: "0"}, 200, function() {
+		$(this).css('position', 'fixed');
+		console.log('position fixed');
+	});
+}
 function hide(selector) {
   $(selector).not('.hidden').addClass('hidden')
 }
@@ -101,7 +107,8 @@ $(document).ready(function() {
     //creates the suggestion list for a search query
     var search = $('#search-book input').val();
     getSuggestions(search);
-    createResultsHeader(search);
+    createResultsHeading(search);
+    moveHeader();
 
     //clears out the text input for future searches
     $('#search-book input').val('');

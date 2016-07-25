@@ -26,15 +26,21 @@ div.container {
 /*--- HEADER STYLING ---*/
 header {
 	text-align: center;
-	padding: 20px 15px;
-
+	padding: 20px 0;
+	margin-top: 200px;
+	border-top: 2px solid #009688;
+	border-bottom: 2px solid #009688;
+	width:100%;
+	background-color: #fff
 }
+
 header h1 {
 	font-size: 34px;
 	color: #009688;
-	margin: 0;
+	margin: 0 0 20px;
 	font-weight: 900;
 }
+
 header #search-book {
 	display: flex;
 	min-width: 100%;
@@ -53,18 +59,12 @@ header #search-book {
 	border: none;
 	background-color: #009688;
 	color: #fff;	
-
-
-}
-
-hr {
-	height: 0.5px;
-	background-color: #009688;
-	margin: 0;
 }
 
 /*--- SECTION.RESULTS STYLING ---*/
-section.search-results {}
+section.search-results {
+	padding-top: 148px;
+}
 
 h2.results-heading {
 	font-size: 24px;
