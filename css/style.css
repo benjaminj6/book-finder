@@ -167,6 +167,12 @@ h5.see-less {
 		display: flex;
 	}
 
+	.extra-data img {
+		width: 127px;
+		height: 190px;
+		object-fit: scale-down;
+	}
+
 	div.extra-book-info {
 		margin-top: 0;
 		padding-left: 15px;
