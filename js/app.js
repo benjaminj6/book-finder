@@ -1,3 +1,7 @@
+function emptyElement(element) {
+  return $(element).empty();
+}
+
 function getSuggestions(bookTitle) {
   var params = {
     q: bookTitle,
@@ -53,6 +57,7 @@ function getBookInfo(bookTitle) {
 
       //returns info for ONLY the book title that matches the query
       if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
+        console.log(thisBookInfo);
         createBookHTML(thisBookInfo);
         return false;
       }
@@ -60,6 +65,7 @@ function getBookInfo(bookTitle) {
   });
 }
 
+// TO DO : refactor when I find the time
 function createBookHTML(bookTitle) {
 
   var $thisBookHTML = $('.template li').clone();
@@ -69,49 +75,39 @@ function createBookHTML(bookTitle) {
   var infoLink = bookTitle.infoLink; 
   var title = bookTitle.title;
   var description = bookTitle.description;
+  var publisher =   validateInfo(bookTitle, 'publisher', bookTitle.publisher, 'Unknown Publisher');
+  var pageCount = validateInfo(bookTitle, 'pageCount', bookTitle.pageCount + 'pgs.', 'Page Info Unavailable');
 
-  // Tests whether Google Books API has information about the book
+  // Special test for image availability
   if (!bookTitle.hasOwnProperty('imageLinks')) {
     var imageURL = 'assets/images/no-image.png';
   } else {
     var imageURL = bookTitle.imageLinks.thumbnail;
   }
 
-  if(!bookTitle.hasOwnProperty('pageCount')) {
-    var pageCount = 'Page Info Unavailable'
-  } else {
-    pageCount = bookTitle.pageCount + 'pgs';
-  }
-
-  if(!bookTitle.hasOwnProperty('publisher')) {
-    var publisher = 'Unknown Publisher'
-  } else {
-    publisher = bookTitle.publisher;
-
-  }
-
-  //adds link
   $thisBookHTML.find('a').attr('href', infoLink)
-  //adds title
   $thisBookHTML.find('a h3').text(title);
-  //adds author
   $thisBookHTML.find('.author').text(author);
-
-  //adds image
-  console.log(bookTitle.imageLinks);
   $thisBookHTML.find('.thumbnail').attr('src', imageURL);
-
-  //adds publication info
   $thisBookHTML.find('.pub-info').text(publishDate + ' by ' + publisher);
-
-  //adds # of pages
   $thisBookHTML.find('.pages').text(pageCount);
-
-  //adds description
   $thisBookHTML.find('p').text(description);
 
-  //appends the book to the list of suggestions
   $('.books-list').append($thisBookHTML);
+}
+
+function validateInfo(bookTitle, property, success, failure) {
+  var value = '';   
+
+  if(!bookTitle.hasOwnProperty(property)) {
+    console.log(bookTitle.title + ' fail')
+    variable = failure;
+  } else {
+    console.log(bookTitle.title + ' success');
+    variable = success;
+  }
+
+return value;
 }
 
 function moveHeader() {
@@ -131,9 +127,10 @@ $(document).ready(function() {
     event.preventDefault();
     
     var $search = $('#search-book input').val(); 
+    var emptyBooksList = emptyElement('.books-list');
 
     if ($search.length > 3) {
-      $('.books-list').empty();
+      emptyBooksList;
       $('.search-results').css('padding-top', '148px');
 
       getSuggestions($search);
@@ -141,8 +138,7 @@ $(document).ready(function() {
 
       $('#search-book input').val('');
     } else {
-      $('.books-list').empty();
-
+      emptyBooksList;
       createResultsHeading('Please enter a search term greater than 3 characters.');
     }
 

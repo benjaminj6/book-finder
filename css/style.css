@@ -1,186 +1,186 @@
 /*--- GENERAL STYLINGS ---*/
+
 .hidden {
-	display: none;
+  display: none;
 }
 
 .color-text {
-	color: #009688 !important;
+  color: #009688 !important;
 }
 
-header button:hover, 
-ul .see-more:hover,  
-ul .see-less:hover {
-	cursor: pointer;
+header button:hover, ul .see-more:hover, ul .see-less:hover {
+  cursor: pointer;
 }
 
 /*--- BODY STYLING ---*/
+
 * {
-	font-family: "Roboto", sans-serif;
-	font-weight: 300;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
 }
 
 body {
-	margin: 0;
+  margin: 0;
 }
 
 div.container {
-	width: 94%;
-	max-width: 600px;
-	margin: 0 auto;
+  margin: 0 auto;
+  max-width: 600px;
+  width: 94%;
 }
 
 /*--- HEADER STYLING ---*/
+
 header {
-	text-align: center;
-	padding: 20px 0;
-	margin-top: 200px;
-	border-top: 2px solid #009688;
-	border-bottom: 2px solid #009688;
-	width:100%;
-	background-color: #fff
+  background-color: #fff;
+  border-bottom: 2px solid #009688;
+  border-top: 2px solid #009688;
+  margin-top: 200px;
+  padding: 20px 0;
+  text-align: center;
+  width: 100%;
 }
 
 header h1 {
-	font-size: 34px;
-	color: #009688;
-	margin: 0 0 20px;
-	font-weight: 900;
+  color: #009688;
+  font-size: 34px;
+  font-weight: 900;
+  margin: 0 0 20px;}
 }
 
 header #search-book {
-	display: flex;
-	min-width: 100%;
-	border: 1px solid #aaa;
+  border: 1px solid #aaa;
+  display: flex;
+  min-width: 100%;
 }
 
 #search-book input {
-	flex-grow: 1;
+  flex-grow: 1;
 }
 
 #search-book input:focus {
-	outline: none;
+  outline: none;
 }
 
 #search-book button {
-	border: none;
-	background-color: #009688;
-	color: #fff;	
+  background-color: #009688;
+  border: none;
+  color: #fff;
 }
 
 /*TODO -- ADD HOVER FOR THE BUTTON THAT CHANGES THE MOUSE POINTER */
 
-
 /*--- SECTION.RESULTS STYLING ---*/
-section.search-results {}
+
+section.search-results {
+}
 
 h2.results-heading {
-	font-size: 24px;
+  font-size: 24px;
 }
 
 .search-results ul {
-	list-style: none;
-	padding-left: 0px;
+  list-style: none;
+  padding-left: 0px;
 }
 
 .search-results ul li.book {
-	border: 1px solid #aaa;
-	margin: 15px auto;
-	border-radius: 2px;
+  border-radius: 2px;
+  border: 1px solid #aaa;
+  margin: 15px auto;
 }
 
 .book div.title-and-author {
-	padding: 15px;
+  padding: 15px;
 }
 
 .title-and-author a {
-	display: block;
-	text-decoration: none;
+  display: block;
+  text-decoration: none;
 }
 
 .title-and-author h3 {
-	margin: 0;
-	color: #000;
-	font-weight: 500;
+  color: #000;
+  font-weight: 500;
+  margin: 0;
 }
 
-
 .title-and-author h4.author {
-	margin: 5px 0 0;
-	color: #009688;
+  color: #009688;
+  margin: 5px 0 0;
 }
 
 .book h5.see-more {
-	background-color: #E0F2F1; 
-	text-align: center;
-	padding: 10px 0;
-	margin: 0;
+  background-color: #E0F2F1;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
 }
 
 .book .dropdown {
-	padding: 10px 20px;
-	background-color: #E0F2F1; 
-
+  background-color: #E0F2F1;
+  padding: 10px 20px;
 }
 
 .book div.extra-data {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .extra-data img {
-	max-width: 90%;
-	display: block;
- 	margin: 0 auto;
- 	align-self: flex-start;
+  align-self: flex-start;
+  display: block;
+  margin: 0 auto;
+  max-width: 90%;
 }
 
 div.extra-book-info {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
-.extra-book-info h5 { 
-	display: inline-block;
-	margin: 0;
-	font-weight: 500;
+.extra-book-info h5 {
+  display: inline-block;
+  font-weight: 500;
+  margin: 0;
 }
+
 .extra-book-info h5.pub-info {
-	display: inline-block;
+  display: inline-block;
 }
-.extra-book-info h5.pages {		
-	display: inline-block;
-	float: right;
+
+.extra-book-info h5.pages {
+  display: inline-block;
+  float: right;
 }
+
 .extra-book-info p {
-	margin: 10px auto;
+  margin: 10px auto;
 }
+
 h5.see-less {
-	text-align: center;
-	margin: 10px auto 0;
+  margin: 10px auto 0;
+  text-align: center;
 }
 
 /*--- MEDIA QUERIES ---*/
+
 @media only screen and (min-width: 600px) {
-	header h1 {
-		font-size: 48px;
-	}
+  header h1 {
+    font-size: 48px;
+  }
 
-	div.extra-data {
-		display: flex;
-	}
+  div.extra-data {
+    display: flex;
+  }
 
-	.extra-data img {
-		width: 127px;
-		height: 190px;
-		object-fit: scale-down;
-	}
+  .extra-data img {
+    height: 190px;
+    object-fit: scale-down;
+    width: 127px;
+  }
 
-	div.extra-book-info {
-		margin-top: 0;
-		padding-left: 15px;
-		min-width: 70%;
-
-	}
+  div.extra-book-info {
+    margin-top: 0;
+    min-width: 70%;
+    padding-left: 15px;
+  }
 }
-
-
-
-
