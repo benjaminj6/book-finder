@@ -51,11 +51,12 @@ header h1 {
 header #search-book {
   border: 1px solid #aaa;
   display: flex;
-  min-width: 100%;
+  width: 100%;  
 }
 
 #search-book input {
   flex-grow: 1;
+  width: 70%
 }
 
 #search-book input:focus {
