@@ -1,0 +1,29 @@
+{
+  "name": "book-finder",
+  "version": "1.0.0",
+  "description": "app which finds book recommendations",
+  "main": "js/main.js",
+  "scripts": {
+    "build:js": "npm run clean:js && webpack",
+    "clean:js": "rm -f build/$npm_package_name.$npm_package_version.js build/$npm_package_name.npm_package_version.js/map",
+    "watch:js": "npm run build:js && webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjaminj6/book-finder.git"
+  },
+  "author": "Benjamin Johnson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjaminj6/book-finder/issues"
+  },
+  "homepage": "https://github.com/benjaminj6/book-finder#readme",
+  "dependencies": {
+    "font-awesome": "^4.6.3",
+    "jquery": "^3.1.0",
+    "normalize.css": "^4.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  }
+}
