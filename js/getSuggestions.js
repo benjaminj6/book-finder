@@ -4,7 +4,7 @@ var createResultsHeading = require('./createResultsHeading');
 var getBookInfo = require('./getBookInfo');
 
 function getSuggestions(bookTitle) {
-  var params = {
+  let params = {
     q: bookTitle,
     type: "books",
     limit: 5,
@@ -18,20 +18,20 @@ function getSuggestions(bookTitle) {
     dataType: "jsonp",
     type: "GET",
   })
-  .done(function(results) {
-    var suggestionResults = results.Similar.Results;
+  .done(results => {
+    let suggestionResults = results.Similar.Results;
 
     if (suggestionResults.length > 0) {
-      var successHeading = 'Books similar to <em>' + bookTitle + '</em>:';
+      let successHeading = `Books similar to <em>${bookTitle}</em>:`;
       createResultsHeading(successHeading);
     } else {
-      var errorHeading = 'Oops! No results were found for <em>' + bookTitle +
-        '</em>. Please try another search.';
+      let errorHeading = `Oops! No results were found for <em> ${bookTitle} </em>. Please try another search.`;
       createResultsHeading(errorHeading);
     }
 
+    // TO DO : put in a recursive function? At least play around with the idea.
     $.each(suggestionResults, function(index, item) {
-      var book = getBookInfo(item.Name);
+      let book = getBookInfo(item.Name);
     });
   });
 }

@@ -1,7 +1,5 @@
 var $ = require('jquery');
 
-function emptyElement(element) {
-	return $(element).empty();
-}
+var emptyElement = element => $(element).empty();
 
 module.exports = emptyElement;

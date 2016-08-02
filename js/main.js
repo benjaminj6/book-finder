@@ -10,16 +10,14 @@ var hide = require('./hide');
 /*------------------------------------------------------------------------------------------------*/
 $(document).ready(function() {
 
-console.log(getSuggestions);
-  $('#search-book').submit(function(event) {
+  $('#search-book').submit(event => {
     event.preventDefault();
     
-    var $search = $('#search-book input').val(); 
-    var emptyBooksList = emptyElement('.books-list');
+    let $search = $('#search-book input').val(); 
+    let emptyBooksList = emptyElement('.books-list');
 
     if ($search.length > 3) {
       emptyBooksList;
-      $('.search-results').css('padding-top', '148px');
 
       getSuggestions($search);
       moveHeader();
@@ -32,7 +30,7 @@ console.log(getSuggestions);
 
   });
 
-  $('.books-list').on('click', '.see-more', function() {  
+  $('.books-list').on('click', '.see-more', () => {  
     hide('.dropdown');
     $('.see-more.hidden').removeClass('hidden');
 
@@ -40,7 +38,7 @@ console.log(getSuggestions);
     $(this).siblings('.dropdown').removeClass('hidden');
   });
 
-  $('.books-list').on('click', '.see-less', function() {
+  $('.books-list').on('click', '.see-less', () => {
     hide('.dropdown');
     $(this).parents().siblings('.see-more').removeClass('hidden');
   });

@@ -1,7 +1,7 @@
 var $ = require('jquery');
 
 function moveHeader() {
-  $('header').animate({ margin: "0" }, 200, function() {
+  $('header').animate({ margin: "0" }, 200, () => {
     $(this).css('position', 'fixed');
   });
 }

@@ -56,16 +56,14 @@
 	/*------------------------------------------------------------------------------------------------*/
 	$(document).ready(function() {
 	
-	console.log(getSuggestions);
-	  $('#search-book').submit(function(event) {
+	  $('#search-book').submit(event => {
 	    event.preventDefault();
 	    
-	    var $search = $('#search-book input').val(); 
-	    var emptyBooksList = emptyElement('.books-list');
+	    let $search = $('#search-book input').val(); 
+	    let emptyBooksList = emptyElement('.books-list');
 	
 	    if ($search.length > 3) {
 	      emptyBooksList;
-	      $('.search-results').css('padding-top', '148px');
 	
 	      getSuggestions($search);
 	      moveHeader();
@@ -78,7 +76,7 @@
 	
 	  });
 	
-	  $('.books-list').on('click', '.see-more', function() {  
+	  $('.books-list').on('click', '.see-more', () => {  
 	    hide('.dropdown');
 	    $('.see-more.hidden').removeClass('hidden');
 	
@@ -86,7 +84,7 @@
 	    $(this).siblings('.dropdown').removeClass('hidden');
 	  });
 	
-	  $('.books-list').on('click', '.see-less', function() {
+	  $('.books-list').on('click', '.see-less', () => {
 	    hide('.dropdown');
 	    $(this).parents().siblings('.see-more').removeClass('hidden');
 	  });
@@ -10179,9 +10177,7 @@
 
 	var $ = __webpack_require__(1);
 	
-	function emptyElement(element) {
-		return $(element).empty();
-	}
+	var emptyElement = element => $(element).empty();
 	
 	module.exports = emptyElement;
 
@@ -10195,7 +10191,7 @@
 	var getBookInfo = __webpack_require__(5);
 	
 	function getSuggestions(bookTitle) {
-	  var params = {
+	  let params = {
 	    q: bookTitle,
 	    type: "books",
 	    limit: 5,
@@ -10209,20 +10205,20 @@
 	    dataType: "jsonp",
 	    type: "GET",
 	  })
-	  .done(function(results) {
-	    var suggestionResults = results.Similar.Results;
+	  .done(results => {
+	    let suggestionResults = results.Similar.Results;
 	
 	    if (suggestionResults.length > 0) {
-	      var successHeading = 'Books similar to <em>' + bookTitle + '</em>:';
+	      let successHeading = `Books similar to <em>${bookTitle}</em>:`;
 	      createResultsHeading(successHeading);
 	    } else {
-	      var errorHeading = 'Oops! No results were found for <em>' + bookTitle +
-	        '</em>. Please try another search.';
+	      let errorHeading = `Oops! No results were found for <em> ${bookTitle} </em>. Please try another search.`;
 	      createResultsHeading(errorHeading);
 	    }
 	
+	    // TO DO : put in a recursive function? At least play around with the idea.
 	    $.each(suggestionResults, function(index, item) {
-	      var book = getBookInfo(item.Name);
+	      let book = getBookInfo(item.Name);
 	    });
 	  });
 	}
@@ -10235,9 +10231,8 @@
 
 	var $ = __webpack_require__(1);
 	
-	function createResultsHeading(message) {
-	  $('.results-heading').html(message);
-	}
+	var createResultsHeading = message => $('.results-heading').html(message);
+	
 	
 	module.exports = createResultsHeading;
 
@@ -10249,24 +10244,24 @@
 	var createBookHTML = __webpack_require__(6);
 	
 	function getBookInfo(bookTitle) { 
-	  var param = {
+	  let params = {
 	    q: bookTitle,
 	    key: "AIzaSyD6ur9ubG33m5ZcajPZVnS-ofqwg9wR4xs",
 	  };
 	
-	  var googleURL = "https://www.googleapis.com/books/v1/volumes?";
+	  let googleURL = "https://www.googleapis.com/books/v1/volumes?";
 	
 	  $.ajax({
 	    url: googleURL,
-	    data: param,
+	    data: params,
 	  })
-	  .done(function(results) {
-	    $.each(results.items, function(index, item) {
-	      var thisBookInfo = item.volumeInfo;
+	  .done(results => {
+	    // TO DO : use a recursive function on these? Play around with it.
+	    $.each(results.items, (index, item) => {
+	      let thisBookInfo = item.volumeInfo;
 	
 	      //returns info for ONLY the book title that matches the query
 	      if (thisBookInfo.title.toLowerCase() === bookTitle.toLowerCase()) {
-	        console.log(thisBookInfo);
 	        createBookHTML(thisBookInfo);
 	        return false;
 	      }
@@ -10286,15 +10281,15 @@
 	// TO DO : refactor when I find the time
 	function createBookHTML(bookTitle) {
 	
-	  var $thisBookHTML = $('.template li').clone();
+	  let $thisBookHTML = $('.template li').clone();
 	
-	  var author = bookTitle.authors[0];
-	  var publishDate = bookTitle.publishedDate;
-	  var infoLink = bookTitle.infoLink; 
-	  var title = bookTitle.title;
-	  var description = bookTitle.description;
-	  var publisher =   validateInfo(bookTitle, 'publisher', bookTitle.publisher, 'Unknown Publisher');
-	  var pageCount = validateInfo(bookTitle, 'pageCount', bookTitle.pageCount + 'pgs.', 'Page Info Unavailable');
+	  let author = bookTitle.authors[0];
+	  let publishDate = bookTitle.publishedDate;
+	  let infoLink = bookTitle.infoLink; 
+	  let title = bookTitle.title;
+	  let description = bookTitle.description;
+	  let publisher =   validateInfo(bookTitle, 'publisher', bookTitle.publisher, 'Unknown Publisher');
+	  let pageCount = validateInfo(bookTitle, 'pageCount', `${bookTitle.pageCount}pgs.`, 'Page Info Unavailable');
 	
 	  // Special test for image availability
 	  if (!bookTitle.hasOwnProperty('imageLinks')) {
@@ -10314,6 +10309,9 @@
 	  $('.books-list').append($thisBookHTML);
 	}
 	
+	var createMessage = (element, message) => element = message;
+	
+	
 	module.exports = createBookHTML;
 	
 
@@ -10326,10 +10324,8 @@
 	  var value = '';   
 	
 	  if(!bookTitle.hasOwnProperty(property)) {
-	    console.log(bookTitle.title + ' fail')
 	    value = failure;
 	  } else {
-	    console.log(bookTitle.title + ' success');
 	    value = success;
 	  }
 	
@@ -10347,7 +10343,7 @@
 	var $ = __webpack_require__(1);
 	
 	function moveHeader() {
-	  $('header').animate({ margin: "0" }, 200, function() {
+	  $('header').animate({ margin: "0" }, 200, () => {
 	    $(this).css('position', 'fixed');
 	  });
 	}
@@ -10360,9 +10356,7 @@
 
 	var $ = __webpack_require__(1);
 	
-	function hide(selector) {
-	  $(selector).not('.hidden').addClass('hidden');
-	}
+	var hide = selector => $(selector).not('.hidden').addClass('hidden');
 	
 	module.exports = hide;
 
